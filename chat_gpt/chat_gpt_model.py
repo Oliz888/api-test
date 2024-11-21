@@ -1,15 +1,14 @@
 from dataclasses import dataclass, field
 from typing import Optional
 
-DEFAULT_MODEL = 'gpt-4o-mini'
+DEFAULT_MODEL = 'gpt-3.5-turbo'
 DEFAULT_TEMPERATURE = 0.9
 DEFAULT_MAX_TOKENS = 1024
 
 
 @dataclass
 class MessageRequestDTO:
-    question: str  # This will be your request, like "Give me 5 tweets"
-    context: Optional[str] = None  # This is the context like "I support abortion because xxx"
+    question: str
     max_tokens: Optional[int] = field(default=DEFAULT_MAX_TOKENS)
     temperature: Optional[float] = field(default=DEFAULT_TEMPERATURE)
     model_id: Optional[str] = field(default=DEFAULT_MODEL)
@@ -20,8 +19,7 @@ class MessageRequestDTO:
             raise Exception('question attribute not found')
 
         res = MessageRequestDTO(
-            question=data['question'],
-            context=data.get('context')  # Extract context if provided
+            question=data['question']
         )
 
         for attr in ['max_tokens', 'temperature', 'model_id']:
