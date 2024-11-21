@@ -11,8 +11,7 @@ def bootstrap():
     # register modules/blueprints
     app.register_blueprint(chat_gpt_route, url_prefix=f'/{chat_gpt_route_path}')
     # start app
-    app.run(port=3001, debug=True)
-
+    app.run(host='0.0.0.0', port=3000, debug=True)
 
 if __name__ == '__main__':
     bootstrap()
